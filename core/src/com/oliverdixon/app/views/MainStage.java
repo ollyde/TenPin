@@ -1,9 +1,13 @@
 package com.oliverdixon.app.views;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.oliverdixon.app.models.Defaults;
+import com.oliverdixon.app.tools.CustomTools;
 
 
 /**
@@ -18,12 +22,32 @@ public class MainStage extends Stage
     {
         super(viewport, batch);
 
+        final float paddingMultiplier = 1.20f; //TODO Would usually be stored in a model under padding's.
+
         //Title
-        LabelExtra title = new LabelExtra("ODs Amazing TenPin!", Defaults.getInstance().getDefaultLabelStyle());
-        title.setCenter(getWidth() / 2f, getHeight() - (title.getHeight() * 1.20f));
+        ViewLabelExtra title = new ViewLabelExtra("Amazing TenPin!", Defaults.getInstance().getDefaultSkin(), "default");
+        title.setPosition((getWidth() / 2f) - (title.getWidth() / 2f), getHeight() - (title.getHeight() * paddingMultiplier));
         this.addActor(title);
 
         //Play Button
-        
+        final TextButton playButton = new TextButton("Play", Defaults.getInstance().getDefaultSkin());
+        playButton.setPosition(getWidth() - (playButton.getWidth() * paddingMultiplier), playButton.getHeight() + (playButton.getWidth() * (1f - paddingMultiplier)));
+        this.addActor(playButton);
+
+        //Main Bowling Info
+        final ViewBowlingInfo bowlingInfo = new ViewBowlingInfo();
+        this.addActor(bowlingInfo);
+
+        //Listener for button.
+        playButton.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                playButton.setChecked(false); //Reset button style state.
+                bowlingInfo.newGame();
+                super.clicked(event, x, y);
+            }
+        });
     }
 }

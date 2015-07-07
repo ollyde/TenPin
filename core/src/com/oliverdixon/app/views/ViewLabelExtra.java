@@ -12,26 +12,26 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  */
 
 //TODO Example of me extending existing framework classes for my own advantage.
-public class LabelExtra extends Label
+public class ViewLabelExtra extends Label
 {
 
-    public LabelExtra(CharSequence text, Skin skin) {
+    public ViewLabelExtra(CharSequence text, Skin skin) {
         super(text, skin);
     }
 
-    public LabelExtra(CharSequence text, Skin skin, String styleName) {
+    public ViewLabelExtra(CharSequence text, Skin skin, String styleName) {
         super(text, skin, styleName);
     }
 
-    public LabelExtra(CharSequence text, Skin skin, String fontName, Color color) {
+    public ViewLabelExtra(CharSequence text, Skin skin, String fontName, Color color) {
         super(text, skin, fontName, color);
     }
 
-    public LabelExtra(CharSequence text, Skin skin, String fontName, String colorName) {
+    public ViewLabelExtra(CharSequence text, Skin skin, String fontName, String colorName) {
         super(text, skin, fontName, colorName);
     }
 
-    public LabelExtra(CharSequence text, LabelStyle style) {
+    public ViewLabelExtra(CharSequence text, LabelStyle style) {
         super(text, style);
     }
 

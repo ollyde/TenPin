@@ -1,9 +1,10 @@
 package com.oliverdixon.app.models;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 /**
  * Created by Oliver Dixon on 07/07/15 under Polygon Attraction
@@ -15,8 +16,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
  */
 public class Defaults //Singleton
 {
-    private BitmapFont defaultFont;
-    private Label.LabelStyle defaultLabelStyle;
+    public static final String
+            ATLAS_PACK = "tenpin_atlas.atlas",
+            SKIN = "skin.json"
+            ;
+
+    private AssetManager assetManager;
+
+    private Skin defaultSkin;
 
     //Singleton management.
     private static Defaults ourInstance = new Defaults();
@@ -30,16 +37,21 @@ public class Defaults //Singleton
 
 
 
-    private Defaults() {
+    private Defaults()
+    {
         //TODO Not thread safe but doesn't matter for this exercise. Usually I'd use a special asset loader class I've made to load textures & sounds in on a 'loading/splash' screen.
 
-        defaultFont = new BitmapFont(Gdx.files.internal("customfont.fnt"));
-        defaultLabelStyle = new Label.LabelStyle(defaultFont, Color.WHITE);
+        assetManager = new AssetManager();
+        assetManager.load(ATLAS_PACK,TextureAtlas.class);
 
+        //TODO Extremely not thread safe. Usually where the load/splash screen would happen. Won't matter for small assets.
+        while(!assetManager.update()){}
 
+        TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal(ATLAS_PACK));
+        defaultSkin = new Skin(Gdx.files.internal(SKIN), textureAtlas);
     }
 
-    public Label.LabelStyle getDefaultLabelStyle() {
-        return defaultLabelStyle;
+    public Skin getDefaultSkin() {
+        return defaultSkin;
     }
 }

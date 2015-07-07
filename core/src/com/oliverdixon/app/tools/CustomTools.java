@@ -20,5 +20,9 @@ public class CustomTools //Singleton
 
     private CustomTools() {}
 
+    //Not related to the singleton but just allows quick and easy logging.
+    public static void log(Object log){
+        System.out.println("OLLY_LOG: " + log);
+    }
 
 }
