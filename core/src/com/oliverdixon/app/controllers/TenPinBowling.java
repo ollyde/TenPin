@@ -11,9 +11,7 @@ import com.oliverdixon.app.views.MainGameStage;
 
 public class TenPinBowling extends ApplicationAdapter
 {
-    private static final Vector2 appSize = new Vector2(800, 480);
-
-	private SpriteBatch spriteBatch;
+    private static final Vector2 appSize = new Vector2(1000, 480);
 
     //Stages
     private MainGameStage mainGameStage;
@@ -21,8 +19,7 @@ public class TenPinBowling extends ApplicationAdapter
 	@Override
 	public void create ()
     {
-        spriteBatch = new SpriteBatch();
-        mainGameStage = new MainGameStage(new ExtendViewport((int)appSize.x, (int)appSize.y), spriteBatch);
+        mainGameStage = new MainGameStage(new ExtendViewport((int)appSize.x, (int)appSize.y), new SpriteBatch());
         Gdx.input.setInputProcessor(mainGameStage);
 	}
 
@@ -38,6 +35,8 @@ public class TenPinBowling extends ApplicationAdapter
     {
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1f); //Background color.
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        mainGameStage.act();
         mainGameStage.draw();
 	}
 }

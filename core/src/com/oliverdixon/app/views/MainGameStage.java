@@ -1,15 +1,15 @@
 package com.oliverdixon.app.views;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.oliverdixon.app.controllers.GameController;
 import com.oliverdixon.app.models.Defaults;
 
 
@@ -21,18 +21,19 @@ import com.oliverdixon.app.models.Defaults;
  */
 public class MainGameStage extends Stage
 {
-    private TextArea textAreaBowlingInfo;
+    private ViewLabelExtra textAreaBowlingInfo;
+    private ScrollPane scrollPane;
 
     public MainGameStage(Viewport viewport, Batch batch)
     {
         super(viewport, batch);
 
-        final float padding = Gdx.graphics.getPpcX() * 0.50f; //TODO Would usually be stored in a model under padding's. This is 1cm & 0.50.
+        final float padding = getWidth() * 0.03f; //TODO Would usually be stored in a model under padding's.
 
         //TODO The text in the following would usually be in a language controller so we can easily load other languages.
 
         //Title
-        ViewLabelExtra title = new ViewLabelExtra("Amazing TenPin!", Defaults.getInstance().getDefaultSkin(), "default");
+        ViewLabelExtra title = new ViewLabelExtra("Olly's TenPin!", Defaults.getInstance().getDefaultSkin(), "default");
         title.setPosition((getWidth() / 2f) - (title.getWidth() / 2f), getHeight() - (title.getHeight() + padding));
         this.addActor(title);
 
@@ -46,33 +47,19 @@ public class MainGameStage extends Stage
         resetButton.setPosition(getWidth() - (playButton.getWidth() + padding), playButton.getY() + playButton.getHeight() + (padding));
         this.addActor(resetButton);
 
-        //Main Bowling Info
-        textAreaBowlingInfo = new TextArea("Welcome to Oliver Dixon's amazing TenPin!", Defaults.getInstance().getDefaultSkin());
-        textAreaBowlingInfo.setAlignment(Align.center);
-        textAreaBowlingInfo.setText(
-                "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes" +
-                        "test test test tes test tes test tes test tes test tes test tes test tes test tes test tes test tes 1"
-        );
+        final float widthOfScrollableArea = playButton.getX() - (padding * 2f);
 
-        ScrollPane scrollPane = new ScrollPane(textAreaBowlingInfo);
-        scrollPane.setBounds(padding, padding, playButton.getX() - padding, title.getY() - (padding * 2f));
-        scrollPane.setScrollingDisabled(false, true);
-        textAreaBowlingInfo.setWidth(scrollPane.getPrefWidth());
+        //Main Bowling Info
+        textAreaBowlingInfo = new ViewLabelExtra("Welcome to Oliver Dixon's Amazing TenPin Bowling!", Defaults.getInstance().getDefaultSkin(), "small");
+        textAreaBowlingInfo.setAlignment(Align.left);
+        textAreaBowlingInfo.setWrap(true);
+
+        scrollPane = new ScrollPane(textAreaBowlingInfo);
+        scrollPane.setBounds(padding, padding, widthOfScrollableArea, title.getY() - (padding * 2f));
+        scrollPane.setScrollingDisabled(true, false);
         this.addActor(scrollPane);
+
+        GameController.getInstance().reset();
 
         //Listener for bowl button.
         playButton.addListener(new ClickListener() {
@@ -97,12 +84,14 @@ public class MainGameStage extends Stage
 
     private void newGame()
     {
-        
+        GameController.getInstance().reset();
+        textAreaBowlingInfo.setText("Game Reset");
     }
 
     private void bowlRandom()
     {
-
+        GameController.getInstance().simulateBowls(MathUtils.round((float)GameController.MAX_NUMBER_OF_FRAMES * MathUtils.random()));
+        textAreaBowlingInfo.setText(GameController.getInstance().getResult());
     }
 
 
