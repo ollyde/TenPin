@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.oliverdixon.app.views.MainStage;
+import com.oliverdixon.app.views.MainGameStage;
 
 
 public class TenPinBowling extends ApplicationAdapter
@@ -16,21 +16,21 @@ public class TenPinBowling extends ApplicationAdapter
 	private SpriteBatch spriteBatch;
 
     //Stages
-    private MainStage mainStage;
-	
+    private MainGameStage mainGameStage;
+
 	@Override
 	public void create ()
     {
         spriteBatch = new SpriteBatch();
-        mainStage = new MainStage(new ExtendViewport((int)appSize.x, (int)appSize.y), spriteBatch);
-        Gdx.input.setInputProcessor(mainStage);
+        mainGameStage = new MainGameStage(new ExtendViewport((int)appSize.x, (int)appSize.y), spriteBatch);
+        Gdx.input.setInputProcessor(mainGameStage);
 	}
 
     public void resize(int width, int height)
     {
         // use true here to center the camera
         // that's what you probably want in case of a UI
-        mainStage.getViewport().update(width, height, false);
+        mainGameStage.getViewport().update(width, height, false);
     }
 
 	@Override
@@ -38,6 +38,6 @@ public class TenPinBowling extends ApplicationAdapter
     {
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1f); //Background color.
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        mainStage.draw();
+        mainGameStage.draw();
 	}
 }

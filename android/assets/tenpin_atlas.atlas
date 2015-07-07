@@ -1,20 +1,20 @@
 
 tenpin_atlas.png
-size: 512,128
+size: 1024,128
 format: RGBA8888
 filter: Nearest,MipMapLinearNearest
 repeat: none
 button
   rotate: false
   xy: 2, 2
-  size: 200, 73
-  orig: 200, 73
+  size: 260, 73
+  orig: 260, 73
   offset: 0, 0
   index: -1
 button_active
   rotate: false
-  xy: 204, 2
-  size: 200, 73
-  orig: 200, 73
+  xy: 264, 2
+  size: 260, 73
+  orig: 260, 73
   offset: 0, 0
   index: -1
