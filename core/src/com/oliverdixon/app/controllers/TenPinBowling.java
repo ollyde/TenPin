@@ -13,16 +13,17 @@ public class TenPinBowling extends ApplicationAdapter
 {
     private static final Vector2 appSize = new Vector2(800, 480);
 
-	SpriteBatch batch;
+	private SpriteBatch spriteBatch;
 
     //Stages
-    MainStage mainStage;
+    private MainStage mainStage;
 	
 	@Override
 	public void create ()
     {
-        batch = new SpriteBatch();
-        mainStage = new MainStage(new ExtendViewport((int)appSize.x, (int)appSize.y), batch);
+        spriteBatch = new SpriteBatch();
+        mainStage = new MainStage(new ExtendViewport((int)appSize.x, (int)appSize.y), spriteBatch);
+        Gdx.input.setInputProcessor(mainStage);
 	}
 
     public void resize(int width, int height)
@@ -35,15 +36,8 @@ public class TenPinBowling extends ApplicationAdapter
 	@Override
 	public void render ()
     {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1f); //Background color.
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         mainStage.draw();
-
-        /*
-		batch.begin();
-        mainStage.draw();
-		batch.end();
-		*/
 	}
 }
