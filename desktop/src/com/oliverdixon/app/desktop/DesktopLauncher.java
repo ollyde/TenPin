@@ -3,11 +3,11 @@ package com.oliverdixon.app.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.math.Vector2;
-import com.oliverdixon.app.TenPinBowling;
+import com.oliverdixon.app.controllers.TenPinBowling;
 
 public class DesktopLauncher
 {
-    private static Vector2 nexus5ResDesktop = new Vector2(800, 480);
+    private static final Vector2 nexus5ResDesktop = new Vector2(800, 480);
 
 	public static void main (String[] arg)
     {

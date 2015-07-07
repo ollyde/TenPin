@@ -1,4 +1,4 @@
-package com.oliverdixon.app;
+package com.oliverdixon.app.tools;
 
 /**
  * Created by Oliver Dixon on 07/07/15 under Polygon Attraction
@@ -18,6 +18,7 @@ public class CustomTools //Singleton
         return ourInstance;
     }
 
-    private CustomTools() {
-    }
+    private CustomTools() {}
+
+
 }

@@ -3,7 +3,7 @@ package com.oliverdixon.app.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.oliverdixon.app.TenPinBowling;
+import com.oliverdixon.app.controllers.TenPinBowling;
 
 public class HtmlLauncher extends GwtApplication {
 
