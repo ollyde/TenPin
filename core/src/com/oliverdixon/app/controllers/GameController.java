@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
-import java.text.DecimalFormat;
-
 /**
  * Created by Oliver Dixon on 07/07/15 under Polygon Attraction
  * This class is private and owned by Oliver Dixon / Polygon Attraction.
